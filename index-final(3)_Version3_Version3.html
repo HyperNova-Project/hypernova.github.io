@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypernova — Foguetagem e Inovação</title>
+    <meta name="description" content="Hypernova — Foguetagem amadora, circuitos avançados e soluções científicas acessíveis para estudantes e entusiastas.">
+    <meta property="og:title" content="Hypernova — Foguetagem e Inovação">
+    <meta property="og:description" content="Desenvolvemos soluções científicas com recursos acessíveis, criando tecnologia real para estudantes e entusiastas.">
+    <meta property="og:image" content="logo.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-bg: #000000;
+            --color-surface: #161616;
+            --color-text-primary: #f5f5f7;
+            --color-text-secondary: #86868b;
+            --color-accent: #0071e3;
+            --color-accent-hover: #0077ed;
+            --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", system-ui, sans-serif;
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            cursor: default;
+        }
+
+        a, button, .btn {
+            cursor: pointer;
+        }
+
+        ::selection {
+            background: rgba(0, 113, 227, 0.3);
+            color: var(--color-text-primary);
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            z-index: 1000;
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        header.scrolled {
+            background: rgba(0, 0, 0, 0.85);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 48px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo img {
+            height: 32px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--color-text-primary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: opacity 0.3s var(--transition-smooth);
+            opacity: 0.88;
+        }
+
+        nav a:hover {
+            opacity: 1;
+        }
+
+        /* HERO */
+        .hero {
+            margin-top: 48px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('hero-background.jpeg') center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1000px;
+            height: 1000px;
+            background: radial-gradient(circle, rgba(0, 113, 227, 0.2) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+            filter: blur(60px);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 1400px;
+            height: 1400px;
+            background: radial-gradient(circle, rgba(0, 113, 227, 0.05) 0%, transparent 50%);
+            animation: rotate 25s linear infinite;
+            filter: blur(40px);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.5; transform: translateX(-50%) scale(1.1); }
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 980px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.8rem;
+            background: linear-gradient(135deg, #ffffff 0%, #86868b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.05;
+        }
+
+        .hero .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.75rem);
+            color: var(--color-text-secondary);
+            font-weight: 400;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.8rem;
+            border: none;
+            border-radius: 980px;
+            font-size: 1.05rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+            text-decoration: none;
+            display: inline-block;
+            font-family: var(--font-main);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: white;
+            box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--color-accent-hover);
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 113, 227, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--color-text-primary);
+            border: 0.5px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* FEATURES */
+        .features {
+            max-width: 1200px;
+            margin: 8rem auto;
+            padding: 4rem 2rem 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 5rem;
+            font-weight: 400;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: rgba(22, 22, 22, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: all 0.5s var(--transition-smooth);
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.5s var(--transition-smooth);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(22, 22, 22, 0.8);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .card p {
+            color: var(--color-text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* ABOUT */
+        .about-section {
+            background: var(--color-surface);
+            padding: 8rem 2rem;
+            margin: 8rem 0;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+        }
+
+        .about-content h3 {
+            font-size: 1.5rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            letter-spacing: -0.02em;
+        }
+
+        .about-content p {
+            color: var(--color-text-secondary);
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about-content li {
+            padding: 0.8rem 0;
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+
+        .about-content li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+
+        /* PROJECTS */
+        .projects-showcase {
+            max-width: 1200px;
+            margin: 8rem auto;
+            padding: 0 2rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            align-items: center;
+        }
+
+        .project-card:nth-child(even) {
+            direction: rtl;
+        }
+
+        .project-card:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .project-image {
+            border-radius: 24px;
+            overflow: hidden;
+            background: var(--color-surface);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s var(--transition-smooth);
+        }
+
+        .project-image:hover {
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--transition-smooth);
+        }
+
+        .project-image video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.08);
+        }
+
+        .project-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .project-content p {
+            color: var(--color-text-secondary);
+            font-size: 1.15rem;
+            line-height: 1.7;
+        }
+
+        /* GALLERY */
+        .gallery-section {
+            max-width: 1400px;
+            margin: 8rem auto;
+            padding: 0 2rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--color-surface);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s var(--transition-smooth);
+            border: 0.5px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s var(--transition-smooth);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* TEAM */
+        .team-section {
+            max-width: 1000px;
+            margin: 8rem auto;
+            padding: 0 2rem;
+        }
+
+        .team-category {
+            background: rgba(22, 22, 22, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.4s var(--transition-smooth);
+        }
+
+        .team-category:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(22, 22, 22, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .team-category h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .team-member {
+            padding: 1rem 0;
+            color: var(--color-text-secondary);
+            font-size: 1.05rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .team-member:last-child {
+            border-bottom: none;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--color-surface);
+            padding: 4rem 2rem 2rem;
+            margin-top: 8rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            opacity: 0.8;
+        }
+
+        .footer-section p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-section a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--color-text-primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-bottom p {
+            color: var(--color-text-secondary);
+            font-size: 0.875rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                min-height: 70vh;
+                padding: 3rem 1.5rem;
+            }
+
+            .project-card {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .project-card:nth-child(even) {
+                direction: ltr;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ANIMAÇÕES — elementos começam invisíveis */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+        }
+
+        /* Scroll pra baixo — elemento entra subindo */
+        .animate-on-scroll.visible-from-below {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll pra cima — elemento entra descendo */
+        .animate-on-scroll.visible-from-above {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Estado "escondido" preparado pra cada direção */
+        .animate-on-scroll.hidden-below {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .animate-on-scroll.hidden-above {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <nav aria-label="Navegação principal">
+            <div class="logo">
+                <img src="logo.png" alt="Hypernova Logo">
+                <span class="logo-text">Hypernova</span>
+            </div>
+            <ul>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#projects">Projetos</a></li>
+                <li><a href="#gallery">Galeria</a></li>
+                <li><a href="#team">Equipe</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transformando ideias em realidade</h1>
+            <p class="subtitle">Foguetagem amadora e tecnologia acessível com o que temos em mãos</p>
+            <p>Montamos, testamos, erramos e melhoramos. Tudo feito por estudantes e entusiastas, com recursos simples e muita tentativa e ajuste.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">Conheça nossos projetos</a>
+                <a href="#about" class="btn btn-secondary">Saiba mais</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+        <h2 class="section-title">O que fazemos</h2>
+        <p class="section-subtitle">Projetos honestos, feitos passo a passo</p>
+        
+        <div class="cards-grid">
+            <div class="card">
+                <span class="card-icon" role="img" aria-label="Foguete">🚀</span>
+                <h3>Foguetagem Amadora</h3>
+                <p>Foguetes de garrafa e PVC, testados na raça, priorizando segurança e reaproveitamento.</p>
+            </div>
+            
+            <div class="card">
+                <span class="card-icon" role="img" aria-label="Raio">⚡</span>
+                <h3>Circuitos e Controle</h3>
+                <p>Módulos simples de controle e telemetria que cabem no bolso e podem ser reparados fácil.</p>
+            </div>
+            
+            <div class="card">
+                <span class="card-icon" role="img" aria-label="Antena">📡</span>
+                <h3>Sensoriamento</h3>
+                <p>Estações meteorológicas compactas para ter dados básicos antes dos lançamentos.</p>
+            </div>
+            
+            <div class="card">
+                <span class="card-icon" role="img" aria-label="Microscópio">🔬</span>
+                <h3>Pesquisa Aplicada</h3>
+                <p>Experimentos simples que comprovam o que estudamos em livros e fóruns.</p>
+            </div>
+            
+            <div class="card">
+                <span class="card-icon" role="img" aria-label="Livros">📚</span>
+                <h3>Educação</h3>
+                <p>Transparência total nos processos, incluindo falhas, para garantir aprendizado coletivo.</p>
+            </div>
+            
+            <div class="card">
+                <span class="card-icon" role="img" aria-label="Planta">🌱</span>
+                <h3>Sustentabilidade</h3>
+                <p>Reaproveitamento máximo de peças e materiais, porque verba curta exige criatividade.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+        <div class="about-content">
+            <h2>Nossa História</h2>
+            <p>
+                A Hypernova nasceu da vontade de entender como as coisas funcionam. Somos estudantes e entusiastas que se juntaram para montar e ajustar projetos reais, com criatividade, reaproveitamento e estudo constante.
+            </p>
+            
+            <h3>Como Começou</h3>
+            <p>
+                Começamos com o que dava: foguetes de garrafa PET, sensores básicos com Arduino e testes no quintal. Sem laboratório e sem verba grande, fomos aprendendo a reaproveitar peças, montar eletrônica modular e usar software livre para tirar as ideias do papel.
+            </p>
+
+            <h3>Missão</h3>
+            <p>Aprender e compartilhar tecnologia acessível com jovens e curiosos, mostrando o que funcionou e o que ainda estamos ajustando.</p>
+
+            <h3>Visão</h3>
+            <p>Ser lembrados como um grupo que dividiu aprendizados reais em foguetagem e eletrônica, sem prometer mais do que pode entregar.</p>
+
+            <h3>Valores</h3>
+            <ul>
+                <li>Transparência sobre acertos e erros</li>
+                <li>Simplicidade para facilitar manutenção</li>
+                <li>Reaproveitamento antes de comprar novo</li>
+                <li>Segurança antes de performance</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="projects-showcase" id="projects">
+        <h2 class="section-title">Projetos Principais</h2>
+        <p class="section-subtitle">Inovação que voa</p>
+        
+        <div class="project-card">
+            <div class="project-image">
+                <img src="flightbuddy.jpg" alt="FlightBuddy" loading="lazy">
+            </div>
+            <div class="project-content">
+                <h3>FlightBuddy</h3>
+                <p>Base de lançamento modular para foguetes de água e pressão. Usa peças acessíveis, desmonta fácil para conserto e conta com eletrônica simples que ajuda a disparar em condições mais seguras.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">
+                <img src="novasquall.png" alt="NovaSquall em desenvolvimento" loading="lazy">
+            </div>
+            <div class="project-content">
+                <h3>NovaSquall</h3>
+                <p>Estação meteorológica portátil em estágio preliminar. Mede umidade, temperatura, vento, radiação UV e chuva para termos noção básica do clima antes dos lançamentos.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-image">
+                <video autoplay loop muted playsinline poster="onesky.jpg">
+                    <source src="video2.mp4" type="video/mp4">
+                    <img src="onesky.jpg" alt="OneSky">
+                </video>
+            </div>
+            <div class="project-content">
+                <h3>OneSky</h3>
+                <p>Foguete classificado para a Jornada de Foguetes da OBAFOG. Feito para ser reutilizável e estável. Ainda estamos ajustando aerodinâmica e recuperação a cada voo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="gallery-section" id="gallery">
+        <h2 class="section-title">Galeria</h2>
+        <p class="section-subtitle">Momentos que definem nossa jornada</p>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="galeria1.jpg" alt="Equipe Hypernova" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="galeria2.jpg" alt="Lançamento" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="galeria3.jpg" alt="Preparação" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="galeria4.jpg" alt="Foguetes" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="galeria6.jpeg" alt="Base de lançamento" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="galeria7.jpeg" alt="Montagem de aleta no corpo do foguete" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="galeria8.jpeg" alt="Foguete em queda livre" loading="lazy">
+            </div>
+            <div class="gallery-item">
+                <img src="galeria9.jpeg" alt="Bate-papo com equipe" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="team-section" id="team">
+        <h2 class="section-title">Nossa Equipe</h2>
+        <p class="section-subtitle">As pessoas por trás da inovação</p>
+
+        <div class="team-category">
+            <h4>🔧 Equipe Técnica / Desenvolvimento</h4>
+            <div class="team-member">Raphael Michelacci Spezzotto Padilha</div>
+            <div class="team-member">Bruno Michelacci Spezzotto de Moraes</div>
+            <div class="team-member">Ricardo Otávio Mariano</div>
+        </div>
+
+        <div class="team-category">
+            <h4>📢 Comunicação e Divulgação</h4>
+            <div class="team-member">Eduardo Hilarino dos Santos</div>
+            <div class="team-member">Raphael Michelacci Spezzotto Padilha</div>
+        </div>
+
+        <div class="team-category">
+            <h4>🛠️ Logística / Secretário</h4>
+            <div class="team-member">Bruno Michelacci Spezzotto de Moraes</div>
+            <div class="team-member">Kael Salles Farinha</div>
+        </div>
+
+        <div class="team-category">
+            <h4>📋 Liderança / Gestão</h4>
+            <div class="team-member">Lucas de Oliveira Freitas</div>
+            <div class="team-member">Carlos Eduardo Hidalgo (Cadu)</div>
+        </div>
+
+        <div class="team-category">
+            <h4>🚀 Cargos em Campo – Execução Prática</h4>
+            <div class="team-member">👨‍🏫 Professor Marcelo – Líder de Campo</div>
+            <div class="team-member">🔫 Lucas / Kael – Gatilho</div>
+            <div class="team-member">💨 Cadu / Ricardo – Bombeamento</div>
+            <div class="team-member">✅ Eduardo / Raphael – Checagem Final</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Hypernova</h4>
+                <p>Grupo de estudantes e entusiastas compartilhando o que aprendem em foguetagem, eletrônica simples e projetos científicos acessíveis.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links Rápidos</h4>
+                <ul>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#projects">Projetos</a></li>
+                    <li><a href="#gallery">Galeria</a></li>
+                    <li><a href="#team">Equipe</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a href="#">Documentação — Em desenvolvimento</a></li>
+                    <li><a href="#">Guias — Em desenvolvimento</a></li>
+                    <li><a href="#">Tutoriais — Em desenvolvimento</a></li>
+                    <li><a href="#">FAQ — Em desenvolvimento</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="mailto:hypernova.rocket@gmail.com">hypernova.rocket@gmail.com</a></li>
+                    <li><a href="https://linktr.ee/hypernova_project">Linktree</a></li>
+                    <li><a href="https://github.com/HyperNova-Project">GitHub</a></li>
+                    <li><a href="https://www.instagram.com/project_hypernova/">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Hypernova. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect + direção do scroll
+        const header = document.querySelector('header');
+        let lastScroll = 0;
+        let scrollDirection = 'down';
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            scrollDirection = currentScroll > lastScroll ? 'down' : 'up';
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animação direcional sem piscadas
+        const animatedElements = document.querySelectorAll('.card, .project-card, .team-category, .gallery-item');
+
+        // Prepara todos os elementos — começam escondidos "por baixo"
+        animatedElements.forEach(el => {
+            el.classList.add('animate-on-scroll', 'hidden-below');
+        });
+
+        // Observer pra quando ENTRA na tela — anima suavemente
+        const showObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+
+                    // Remove qualquer estado escondido
+                    el.classList.remove('hidden-below', 'hidden-above');
+
+                    // Adiciona a classe de visível conforme a direção
+                    if (scrollDirection === 'down') {
+                        el.classList.add('visible-from-below');
+                        el.classList.remove('visible-from-above');
+                    } else {
+                        el.classList.add('visible-from-above');
+                        el.classList.remove('visible-from-below');
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        // Observer separado com margem GRANDE — só reseta quando está BEM longe da tela
+        const resetObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    const el = entry.target;
+                    const rect = el.getBoundingClientRect();
+
+                    // Remove as classes de visível
+                    el.classList.remove('visible-from-below', 'visible-from-above');
+
+                    // Prepara o estado escondido baseado em onde o elemento está
+                    if (rect.top > 0) {
+                        // Elemento está ABAIXO da tela — vai entrar subindo
+                        el.classList.remove('hidden-above');
+                        el.classList.add('hidden-below');
+                    } else {
+                        // Elemento está ACIMA da tela — vai entrar descendo
+                        el.classList.remove('hidden-below');
+                        el.classList.add('hidden-above');
+                    }
+                }
+            });
+        }, {
+            threshold: 0,
+            rootMargin: '200px 0px 200px 0px'  // Margem grande — só reseta quando está bem longe
+        });
+
+        animatedElements.forEach(el => {
+            showObserver.observe(el);
+            resetObserver.observe(el);
+        });
+    </script>
+</body>
+</html>
